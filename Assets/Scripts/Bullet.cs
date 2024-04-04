@@ -7,6 +7,7 @@ public class Bullet : MonoBehaviour
 {
     public float speed = 10;
     public float lifetime = 3;
+    public int damage = 15;
     
     void Start()
     {
@@ -18,6 +19,11 @@ public class Bullet : MonoBehaviour
     {
         //TODO: Add explosion effect
         //TODO: Do damage
+        var enemy = collision.gameObject.GetComponent<Health>();
+        if(enemy != null)
+        {
+            enemy.Takedamage(damage);
+        }
         //TODO: destroy destructables (like crates)
         Destroy(gameObject);
     }
