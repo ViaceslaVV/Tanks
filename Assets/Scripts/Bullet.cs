@@ -8,7 +8,10 @@ public class Bullet : MonoBehaviour
     public float speed = 10;
     public float lifetime = 3;
     public int damage = 15;
-    
+
+    [Header("VFX")]
+    public GameObject explotion;
+
     void Start()
     {
         GetComponent<Rigidbody>().velocity = transform.forward * speed;
@@ -19,6 +22,8 @@ public class Bullet : MonoBehaviour
     {
         //TODO: Add explosion effect
         //TODO: Do damage
+        Instantiate(explotion, transform.position, Quaternion.identity);
+
         var enemy = collision.gameObject.GetComponent<Health>();
         if(enemy != null)
         {

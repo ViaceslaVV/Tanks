@@ -12,6 +12,10 @@ public class Player : MonoBehaviour
 
     [Header("UI")]
     public Transform healthBar;
+
+    [Header("VFX")]
+    public GameObject dustVFX;
+
     
     Rigidbody rb;
     Vector3 input = new Vector3();
@@ -42,9 +46,22 @@ public class Player : MonoBehaviour
             input.z = Input.GetAxis("VerticalArrow");
 
         }
+        
 
         if (input != Vector3.zero)
-         transform.forward = input;
+        {
+            transform.forward = input;
+            if (!dustVFX.activeSelf)
+                dustVFX.SetActive(true);
+        }
+        else
+        {
+            if(dustVFX.activeSelf)
+            {
+                dustVFX.SetActive(false);
+            }
+        }
+         
     }
     
     void FixedUpdate()
