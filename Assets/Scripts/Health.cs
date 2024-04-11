@@ -8,6 +8,7 @@ public class Health : MonoBehaviour
     public int maxHealth = 100;
     [Header("VFX")]
     public GameObject barrelexplotion;
+   
 
     public UnityEvent<int, int> onDamage; //pass in current health, max health
     public UnityEvent onDie;
@@ -30,4 +31,5 @@ public class Health : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    
 }

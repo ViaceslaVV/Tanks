@@ -30,6 +30,11 @@ public class Bullet : MonoBehaviour
             enemy.Takedamage(damage);
         }
         //TODO: destroy destructables (like crates)
+        Collide();
+    }
+    public virtual void Collide()
+    {
+        Instantiate(explotion, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 }
