@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -7,34 +5,37 @@ public class Bullet : MonoBehaviour
 {
     public float speed = 10;
     public float lifetime = 3;
-    public int damage = 15;
+    public int damage = 10;
 
     [Header("VFX")]
-    public GameObject explotion;
+    public GameObject explosionVFX;
 
     void Start()
     {
         GetComponent<Rigidbody>().velocity = transform.forward * speed;
         Destroy(gameObject, lifetime);
     }
-    
+
     void OnCollisionEnter(Collision collision)
     {
-        //TODO: Add explosion effect
-        //TODO: Do damage
-        Instantiate(explotion, transform.position, Quaternion.identity);
-
         var enemy = collision.gameObject.GetComponent<Health>();
-        if(enemy != null)
+        if (enemy != null)
         {
-            enemy.Takedamage(damage);
+            enemy.TakeDamage(damage);
         }
-        //TODO: destroy destructables (like crates)
+
+        var destructable = collision.gameObject.GetComponent<Destructable>();
+        if (destructable != null)
+        {
+            destructable.Detroy();
+        }
+
         Collide();
     }
+
     public virtual void Collide()
     {
-        Instantiate(explotion, transform.position, Quaternion.identity);
+        Instantiate(explosionVFX, transform.position + Vector3.up, Quaternion.identity);
         Destroy(gameObject);
     }
 }

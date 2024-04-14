@@ -8,5 +8,10 @@ public class NextScene : MonoBehaviour
     public void NextScenee()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
+    }
+    public void PrevScenee()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
 }
